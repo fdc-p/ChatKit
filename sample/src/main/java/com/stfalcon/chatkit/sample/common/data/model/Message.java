@@ -50,6 +50,14 @@ public class Message implements IMessage,
         return this.user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
     @Override
     public String getImageUrl() {
         return image == null ? null : image.url;

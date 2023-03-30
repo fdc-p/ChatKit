@@ -1,5 +1,6 @@
 package com.stfalcon.chatkit.sample.common.data.fixtures;
 
+import com.stfalcon.chatkit.sample.R;
 import com.stfalcon.chatkit.sample.common.data.model.Message;
 import com.stfalcon.chatkit.sample.common.data.model.User;
 
@@ -67,4 +68,26 @@ public final class MessagesFixtures extends FixturesData {
                 even ? avatars.get(0) : avatars.get(1),
                 true);
     }
+
+    public static User getSendUser() {
+        return new User(
+                "0",
+                names.get(0),
+                avatars.get(0),
+                true);
+    }
+
+    public static User getReceiveUser() {
+        return new User(
+                "1",
+                names.get(1),
+                avatars.get(1),
+                true);
+    }
+
+    public static User getAIUser() {
+        User user =  getReceiveUser();
+        return  user;
+    }
+
 }

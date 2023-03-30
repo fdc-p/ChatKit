@@ -3,14 +3,18 @@ package com.stfalcon.chatkit.sample.features.demo.styled;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 import com.stfalcon.chatkit.sample.R;
 import com.stfalcon.chatkit.sample.common.data.fixtures.MessagesFixtures;
+import com.stfalcon.chatkit.sample.common.data.model.Message;
 import com.stfalcon.chatkit.sample.features.demo.DemoMessagesActivity;
 import com.stfalcon.chatkit.utils.DateFormatter;
+import com.tiptop.ai.GPTProxy;
 
 import java.util.Date;
 
@@ -40,8 +44,26 @@ public class StyledMessagesActivity extends DemoMessagesActivity
 
     @Override
     public boolean onSubmit(CharSequence input) {
-        messagesAdapter.addToStart(
-                MessagesFixtures.getTextMessage(input.toString()), true);
+        Message sendMessage = MessagesFixtures.getTextMessage(input.toString());
+        sendMessage.setText(input.toString());
+        sendMessage.setUser(MessagesFixtures.getSendUser());
+        messagesAdapter.addToStart(sendMessage
+                , true);
+
+        Message aiMessage = MessagesFixtures.getTextMessage(input.toString());
+        aiMessage.setText("loading....");
+        aiMessage.setUser(MessagesFixtures.getAIUser());
+        messagesAdapter.addToStart(aiMessage
+                , true);
+
+        //todo am_111
+        GPTProxy.requestInThread("test", 1, input.toString(), new GPTProxy.IGTPCallback() {
+            @Override
+            public void onReceiveMsg(String msg) {
+                aiMessage.setText(msg);
+                messagesAdapter.update(aiMessage);
+            }
+        });
         return true;
     }
 

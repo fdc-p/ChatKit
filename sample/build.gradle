@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+
+    compileSdkVersion 30
+    buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId "com.stfalcon.chatkit.sample"
-        minSdkVersion 14
+        minSdkVersion 21
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -25,6 +26,21 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+
+configurations.all {
+    resolutionStrategy {
+        //force 'commons-beanutils:1.8.0'
     }
 }
 
@@ -51,4 +67,8 @@ dependencies {
     //Utils
     implementation "me.relex:circleindicator:1.2.2@aar"
 
+    //版本必须一致
+    //http client
+    //https://jiuaidu.com/jianzhan/891370/
+    implementation group: 'org.apache.httpcomponents' , name: 'httpclient' , version: '4.3.5'
 }

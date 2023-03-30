@@ -34,6 +34,18 @@ public class User implements IUser {
         return avatar;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
     public boolean isOnline() {
         return online;
     }

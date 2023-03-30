@@ -661,8 +661,10 @@ public class DialogsListAdapter<DIALOG extends IDialog>
 
             //Set Last message user avatar with check if there is last message
             if (imageLoader != null && dialog.getLastMessage() != null) {
+                //ivLastMessageUser.setImageResource(R.drawable.ic_send);
                 imageLoader.loadImage(ivLastMessageUser, dialog.getLastMessage().getUser().getAvatar(), null);
             }
+
             ivLastMessageUser.setVisibility(dialogStyle.isDialogMessageAvatarEnabled()
                     && dialog.getUsers().size() > 1
                     && dialog.getLastMessage() != null ? VISIBLE : GONE);
