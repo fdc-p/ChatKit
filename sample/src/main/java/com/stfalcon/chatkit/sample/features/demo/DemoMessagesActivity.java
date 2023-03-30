@@ -2,6 +2,7 @@ package com.stfalcon.chatkit.sample.features.demo;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,13 +72,13 @@ public abstract class DemoMessagesActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        messagesAdapter.addToStart(MessagesFixtures.getTextMessage(), true);
+        //messagesAdapter.addToStart(MessagesFixtures.getTextMessage(), true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
-        getMenuInflater().inflate(R.menu.chat_actions_menu, menu);
+        //getMenuInflater().inflate(R.menu.chat_actions_menu, menu);
         onSelectionChanged(0);
         return true;
     }
@@ -145,13 +146,23 @@ public abstract class DemoMessagesActivity extends AppCompatActivity
         }
     }
 
+    protected void loadGuide(String guide) {
+        if (TextUtils.isEmpty(guide))
+            return;
+        Message sendMessage = MessagesFixtures.getTextMessage(guide);
+        sendMessage.setText(guide);
+        sendMessage.setUser(MessagesFixtures.getAIUser());
+        messagesAdapter.addToStart(sendMessage, true);
+    }
+
     protected void loadMessages() {
         //imitation of internet connection
-        new Handler().postDelayed(() -> {
-            ArrayList<Message> messages = MessagesFixtures.getMessages(lastLoadedDate);
-            lastLoadedDate = messages.get(messages.size() - 1).getCreatedAt();
-            messagesAdapter.addToEnd(messages, false);
-        }, 1000);
+        //todo am_111 暂时不需要缓存以前的历史逻辑
+//        new Handler().postDelayed(() -> {
+//            ArrayList<Message> messages = MessagesFixtures.getMessages(lastLoadedDate);
+//            lastLoadedDate = messages.get(messages.size() - 1).getCreatedAt();
+//            messagesAdapter.addToEnd(messages, false);
+//        }, 1000);
     }
 
     private MessagesListAdapter.Formatter<Message> getMessageStringFormatter() {

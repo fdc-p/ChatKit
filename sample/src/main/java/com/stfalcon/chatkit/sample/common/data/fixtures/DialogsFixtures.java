@@ -1,5 +1,8 @@
 package com.stfalcon.chatkit.sample.common.data.fixtures;
 
+import android.util.Log;
+
+import com.stfalcon.chatkit.ChatConfig;
 import com.stfalcon.chatkit.sample.common.data.model.Dialog;
 import com.stfalcon.chatkit.sample.common.data.model.Message;
 import com.stfalcon.chatkit.sample.common.data.model.User;
@@ -31,6 +34,8 @@ public final class DialogsFixtures extends FixturesData {
     }
 
     private static Dialog getDialog(int i, Date lastMessageCreatedAt) {
+        if(ChatConfig.ENABLE_LOG)
+            Log.i(ChatConfig.TAG, "getDialog: ");
         ArrayList<User> users = getUsers();
         return new Dialog(
                 getRandomId(),

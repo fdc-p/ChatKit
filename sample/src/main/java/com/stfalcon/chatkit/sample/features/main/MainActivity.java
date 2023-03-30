@@ -11,6 +11,7 @@ import com.stfalcon.chatkit.sample.features.demo.custom.layout.CustomLayoutDialo
 import com.stfalcon.chatkit.sample.features.demo.custom.media.CustomMediaMessagesActivity;
 import com.stfalcon.chatkit.sample.features.demo.def.DefaultDialogsActivity;
 import com.stfalcon.chatkit.sample.features.demo.styled.StyledDialogsActivity;
+import com.stfalcon.chatkit.sample.features.demo.styled.StyledMessagesActivity;
 import com.stfalcon.chatkit.sample.features.main.adapter.DemoCardFragment;
 import com.stfalcon.chatkit.sample.features.main.adapter.MainActivityPagerAdapter;
 
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity
         CircleIndicator indicator = findViewById(R.id.indicator);
         indicator.setViewPager(pager);
 
+        //直接跳转到需求页面 todo am_111 很好 接口已经生成 要拯救世界了
+        StyledMessagesActivity.open(this, "我能帮你什么呢。。。随便你输入 立刻给你反馈哦！！", "test", 1);
+
+        finish();
     }
 
     @Override

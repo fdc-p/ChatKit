@@ -21,6 +21,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.stfalcon.chatkit.ChatConfig;
 import com.stfalcon.chatkit.R;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.commons.ViewHolder;
@@ -150,6 +152,8 @@ public class MessagesListAdapter<MESSAGE extends IMessage>
      * @param scroll  {@code true} if need to scroll list to bottom when message added.
      */
     public void addToStart(MESSAGE message, boolean scroll) {
+        if (ChatConfig.ENABLE_LOG)
+            Log.i(ChatConfig.TAG, "addToStart: message=" + message.getText() + " scroll=" + scroll);
         boolean isNewMessageToday = !isPreviousSameDate(0, message.getCreatedAt());
         if (isNewMessageToday) {
             items.add(0, new Wrapper<>(message.getCreatedAt()));

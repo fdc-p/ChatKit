@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
+import com.stfalcon.chatkit.ChatConfig;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
@@ -25,28 +27,46 @@ public class StyledMessagesActivity extends DemoMessagesActivity
         implements MessageInput.InputListener,
         MessageInput.AttachmentsListener {
 
-    public static void open(Context context) {
-        context.startActivity(new Intent(context, StyledMessagesActivity.class));
+    public static void open(Context context, String guide, String token, int versionCode) {
+        Intent intent = new Intent(context, StyledMessagesActivity.class);
+        intent.putExtra("guide", guide);
+        intent.putExtra("token", token);
+        intent.putExtra("version", versionCode);
+        context.startActivity(intent);
     }
 
+    private MessageInput mInputView = null;
+    private String mToken = "";
+    private int mVersion = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_styled_messages);
 
-        MessageInput input = findViewById(R.id.input);
-        input.setInputListener(this);
-        input.setAttachmentsListener(this);
+        mInputView = findViewById(R.id.input);
+        mInputView.setInputListener(this);
+        mInputView.setAttachmentsListener(this);
 
         //这个是最先调用的 其他的后面一些
         initAdapterStyleDesign();
+
+        Intent intent = getIntent();
+        String guide = intent.getStringExtra("guide");
+        mToken = intent.getStringExtra("token");
+        mVersion = intent.getIntExtra("version", 1);
+        loadGuide(guide);
+
+        if (ChatConfig.ENABLE_LOG)
+            Log.i(ChatConfig.TAG, "onCreate: ....");
+
+        mInputView.messageInput.requestFocus();
     }
 
     @Override
-    public boolean onSubmit(CharSequence input) {
-        Message sendMessage = MessagesFixtures.getTextMessage(input.toString());
-        sendMessage.setText(input.toString());
+    public boolean onSubmit(CharSequence text) {
+        Message sendMessage = MessagesFixtures.getTextMessage(text.toString());
+        sendMessage.setText(text.toString());
         sendMessage.setUser(MessagesFixtures.getSendUser());
         messagesAdapter.addToStart(sendMessage
                 , true);
@@ -56,8 +76,7 @@ public class StyledMessagesActivity extends DemoMessagesActivity
         messagesAdapter.addToStart(aiMessage
                 , true);
 
-        //todo am_111
-        GPTProxy.requestInThread("test", 1, input.toString(), new GPTProxy.IGTPCallback() {
+        GPTProxy.requestInThread(mToken, mVersion, text.toString(), new GPTProxy.IGTPCallback() {
             @Override
             public void onReceiveMsg(String msg) {
                 aiMessage.setText(msg);
@@ -69,6 +88,7 @@ public class StyledMessagesActivity extends DemoMessagesActivity
 
     @Override
     public void onAddAttachments() {
-        messagesAdapter.addToStart(MessagesFixtures.getImageMessage(), true);
+        if (ChatConfig.ENABLE_LOG)
+            Log.i(ChatConfig.TAG, "onAddAttachments: ....");
     }
 }

@@ -43,7 +43,7 @@ import java.lang.reflect.Field;
 public class MessageInput extends RelativeLayout
         implements View.OnClickListener, TextWatcher, View.OnFocusChangeListener {
 
-    protected EditText messageInput;
+    public EditText messageInput;
     protected ImageButton messageSendButton;
     protected ImageButton attachmentButton;
     protected Space sendButtonSpace, attachmentButtonSpace;
