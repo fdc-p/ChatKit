@@ -12,7 +12,10 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter;
 import com.stfalcon.chatkit.sample.R;
 import com.stfalcon.chatkit.sample.common.data.fixtures.MessagesFixtures;
 import com.stfalcon.chatkit.sample.common.data.model.Message;
+import com.stfalcon.chatkit.sample.common.data.model.User;
 import com.stfalcon.chatkit.sample.features.demo.DemoMessagesActivity;
+import com.stfalcon.chatkit.sample.features.demo.def.DefaultMessagesActivity;
+import com.stfalcon.chatkit.sample.utils.AppUtils;
 import com.stfalcon.chatkit.utils.DateFormatter;
 import com.tiptop.ai.GPTProxy;
 
@@ -20,26 +23,24 @@ import java.util.Date;
 
 public class StyledMessagesActivity extends DemoMessagesActivity
         implements MessageInput.InputListener,
-        MessageInput.AttachmentsListener,
-        DateFormatter.Formatter {
+        MessageInput.AttachmentsListener {
 
     public static void open(Context context) {
         context.startActivity(new Intent(context, StyledMessagesActivity.class));
     }
 
-    private MessagesList messagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_styled_messages);
 
-        messagesList = findViewById(R.id.messagesList);
-        initAdapter();
-
         MessageInput input = findViewById(R.id.input);
         input.setInputListener(this);
         input.setAttachmentsListener(this);
+
+        //这个是最先调用的 其他的后面一些
+        initAdapterStyleDesign();
     }
 
     @Override
@@ -50,9 +51,8 @@ public class StyledMessagesActivity extends DemoMessagesActivity
         messagesAdapter.addToStart(sendMessage
                 , true);
 
-        Message aiMessage = MessagesFixtures.getTextMessage(input.toString());
-        aiMessage.setText("loading....");
-        aiMessage.setUser(MessagesFixtures.getAIUser());
+        User aiUser = MessagesFixtures.getAIUser();
+        Message aiMessage = new Message(aiUser.getId(), aiUser, "loading...");
         messagesAdapter.addToStart(aiMessage
                 , true);
 
@@ -70,24 +70,5 @@ public class StyledMessagesActivity extends DemoMessagesActivity
     @Override
     public void onAddAttachments() {
         messagesAdapter.addToStart(MessagesFixtures.getImageMessage(), true);
-    }
-
-    @Override
-    public String format(Date date) {
-        if (DateFormatter.isToday(date)) {
-            return getString(R.string.date_header_today);
-        } else if (DateFormatter.isYesterday(date)) {
-            return getString(R.string.date_header_yesterday);
-        } else {
-            return DateFormatter.format(date, DateFormatter.Template.STRING_DAY_MONTH_YEAR);
-        }
-    }
-
-    private void initAdapter() {
-        super.messagesAdapter = new MessagesListAdapter<>(super.senderId, super.imageLoader);
-        super.messagesAdapter.enableSelectionMode(this);
-        super.messagesAdapter.setLoadMoreListener(this);
-        super.messagesAdapter.setDateHeadersFormatter(this);
-        messagesList.setAdapter(super.messagesAdapter);
     }
 }

@@ -574,13 +574,15 @@ public class MessageHolders {
         if (item instanceof IMessage) {
             ((MessageHolders.BaseMessageViewHolder) holder).isSelected = isSelected;
             ((MessageHolders.BaseMessageViewHolder) holder).imageLoader = imageLoader;
-            holder.itemView.setOnLongClickListener(onMessageLongClickListener);
-            holder.itemView.setOnClickListener(onMessageClickListener);
+            //todo am_111 把这个都屏蔽了。。。。
+            //holder.itemView.setOnLongClickListener(onMessageLongClickListener);
+            //holder.itemView.setOnClickListener(onMessageClickListener);
 
             for (int i = 0; i < clickListenersArray.size(); i++) {
                 final int key = clickListenersArray.keyAt(i);
                 final View view = holder.itemView.findViewById(key);
                 if (view != null) {
+                    //am_111 对于view层层级的回调 都是选择中的逻辑
                     view.setOnClickListener(v -> clickListenersArray.get(key).onMessageViewClick(view, (IMessage) item));
                 }
             }
@@ -1039,6 +1041,9 @@ public class MessageHolders {
 
         protected TextView time;
         protected ImageView userAvatar;
+        protected ImageView messageShare;
+        protected ImageView messageCopy;
+        protected ImageView messageDelete;
 
         @Deprecated
         public BaseIncomingMessageViewHolder(View itemView) {
@@ -1058,6 +1063,7 @@ public class MessageHolders {
             }
 
             userAvatar.setImageResource(R.drawable.ai_avatar);
+            //这里不用网络加载模型 改用本地图片
 //            if (userAvatar != null) {
 //                boolean isAvatarExists = imageLoader != null
 //                        && message.getUser().getAvatar() != null
@@ -1088,6 +1094,9 @@ public class MessageHolders {
         private void init(View itemView) {
             time = itemView.findViewById(R.id.messageTime);
             userAvatar = itemView.findViewById(R.id.messageUserAvatar);
+            messageShare = itemView.findViewById(R.id.messageShare);
+            messageCopy = itemView.findViewById(R.id.messageCopy);
+            messageDelete = itemView.findViewById(R.id.messageDelete);
         }
     }
 
