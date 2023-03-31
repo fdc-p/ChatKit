@@ -43,6 +43,7 @@ import java.lang.reflect.Field;
 public class MessageInput extends RelativeLayout
         implements View.OnClickListener, TextWatcher, View.OnFocusChangeListener {
 
+    public boolean waitingResponse = false;
     public EditText messageInput;
     protected ImageButton messageSendButton;
     protected ImageButton attachmentButton;
@@ -138,7 +139,7 @@ public class MessageInput extends RelativeLayout
     @Override
     public void onTextChanged(CharSequence s, int start, int count, int after) {
         input = s;
-        messageSendButton.setEnabled(input.length() > 0);
+        messageSendButton.setEnabled(!waitingResponse && input.length() > 0);
         if (s.length() > 0) {
             if (!isTyping) {
                 isTyping = true;

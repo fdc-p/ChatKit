@@ -82,9 +82,11 @@ public class StyledMessagesActivity extends DemoMessagesActivity
         messagesAdapter.addToStart(aiMessage
                 , true);
 
+        mInputView.waitingResponse = true;
         GPTProxy.requestInThread(mToken, mVersion, text.toString(), new GPTProxy.IGTPCallback() {
             @Override
             public void onReceiveMsg(String msg) {
+                mInputView.waitingResponse = false;
                 aiMessage.setText(msg);
                 messagesAdapter.update(aiMessage);
             }
