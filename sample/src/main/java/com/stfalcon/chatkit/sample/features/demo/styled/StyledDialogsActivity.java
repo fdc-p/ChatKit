@@ -34,7 +34,7 @@ public class StyledDialogsActivity extends DemoDialogsActivity
 
     @Override
     public void onDialogClick(Dialog dialog) {
-        StyledMessagesActivity.open(this, "", "test", 1);
+        StyledMessagesActivity.open(this, "Hi,Can I help you?", "test user Input....", "user_token", 1);
     }
 
     @Override

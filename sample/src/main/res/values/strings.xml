@@ -15,7 +15,7 @@
     <string name="sample_title_custom_content">Custom content type</string>
     <string name="sample_subtitle_custom_content">Custom message content on the example of voice message</string>
 
-    <string name="hint_enter_a_message">Type a message…</string>
+    <string name="hint_enter_a_message">Ask a question</string>
     <string name="on_log_click_message">Your custom long click handler</string>
     <string name="action_delete">Delete</string>
     <string name="action_copy">Copy</string>

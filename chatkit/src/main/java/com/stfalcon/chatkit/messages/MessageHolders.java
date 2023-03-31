@@ -2,6 +2,7 @@ package com.stfalcon.chatkit.messages;
 
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 
+import com.stfalcon.chatkit.ChatConfig;
 import com.stfalcon.chatkit.R;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.commons.ViewHolder;
@@ -782,8 +784,8 @@ public class MessageHolders {
 
             if (text != null) {
                 text.setTextColor(style.getIncomingTextColor());
-                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getIncomingTextSize());
-                text.setTypeface(text.getTypeface(), style.getIncomingTextStyle());
+                //text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getIncomingTextSize());
+                //text.setTypeface(text.getTypeface(), style.getIncomingTextStyle());
                 text.setAutoLinkMask(style.getTextAutoLinkMask());
                 text.setLinkTextColor(style.getIncomingTextLinkColor());
                 configureLinksBehavior(text);
@@ -841,8 +843,8 @@ public class MessageHolders {
 
             if (text != null) {
                 text.setTextColor(style.getOutcomingTextColor());
-                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getOutcomingTextSize());
-                text.setTypeface(text.getTypeface(), style.getOutcomingTextStyle());
+                //text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getOutcomingTextSize());
+                //text.setTypeface(text.getTypeface(), style.getOutcomingTextStyle());
                 text.setAutoLinkMask(style.getTextAutoLinkMask());
                 text.setLinkTextColor(style.getOutcomingTextLinkColor());
                 configureLinksBehavior(text);

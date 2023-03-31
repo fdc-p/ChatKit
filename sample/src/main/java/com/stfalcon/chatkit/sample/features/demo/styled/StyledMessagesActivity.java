@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.stfalcon.chatkit.ChatConfig;
@@ -27,9 +28,10 @@ public class StyledMessagesActivity extends DemoMessagesActivity
         implements MessageInput.InputListener,
         MessageInput.AttachmentsListener {
 
-    public static void open(Context context, String guide, String token, int versionCode) {
+    public static void open(Context context, String aiGuide, String userText, String token, int versionCode) {
         Intent intent = new Intent(context, StyledMessagesActivity.class);
-        intent.putExtra("guide", guide);
+        intent.putExtra("guide", aiGuide);
+        intent.putExtra("text", userText);
         intent.putExtra("token", token);
         intent.putExtra("version", versionCode);
         context.startActivity(intent);
@@ -52,15 +54,19 @@ public class StyledMessagesActivity extends DemoMessagesActivity
         initAdapterStyleDesign();
 
         Intent intent = getIntent();
-        String guide = intent.getStringExtra("guide");
+        String aiGuide = intent.getStringExtra("guide");
+        String userText = intent.getStringExtra("text");
         mToken = intent.getStringExtra("token");
         mVersion = intent.getIntExtra("version", 1);
-        loadGuide(guide);
 
-        if (ChatConfig.ENABLE_LOG)
-            Log.i(ChatConfig.TAG, "onCreate: ....");
+        if (!TextUtils.isEmpty(aiGuide)) {
+            loadGuide(aiGuide);
+        }
 
         mInputView.messageInput.requestFocus();
+        if (!TextUtils.isEmpty(userText)) {
+            mInputView.messageInput.setText(userText);
+        }
     }
 
     @Override

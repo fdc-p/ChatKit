@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/color_bg_base">
 
     <com.stfalcon.chatkit.messages.MessagesList
         android:id="@+id/messagesList"
@@ -10,8 +10,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/input"
         app:dateHeaderFormat="dd MMMM yyyy"
-        app:incomingDefaultBubbleColor="@color/ivory"
-        app:incomingDefaultBubblePressedColor="@color/ivory_dark"
+        app:incomingDefaultBubbleColor="@color/white"
+        app:incomingDefaultBubblePressedColor="@color/white"
         app:incomingDefaultBubbleSelectedColor="@color/gray"
         app:incomingDefaultImageOverlayPressedColor="@color/black_10"
         app:incomingDefaultImageOverlaySelectedColor="@color/gray_transparent"

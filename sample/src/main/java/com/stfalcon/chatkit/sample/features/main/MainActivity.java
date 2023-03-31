@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         indicator.setViewPager(pager);
 
         //直接跳转到需求页面 todo am_111 很好 接口已经生成 要拯救世界了
-        StyledMessagesActivity.open(this, "我能帮你什么呢。。。随便你输入 立刻给你反馈哦！！", "test", 1);
+        StyledMessagesActivity.open(this, "Hi,Can I help you?", "test user Input....", "user_token", 1);
 
         finish();
     }

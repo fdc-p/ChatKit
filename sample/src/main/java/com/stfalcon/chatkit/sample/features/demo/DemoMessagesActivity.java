@@ -147,8 +147,6 @@ public abstract class DemoMessagesActivity extends AppCompatActivity
     }
 
     protected void loadGuide(String guide) {
-        if (TextUtils.isEmpty(guide))
-            return;
         Message sendMessage = MessagesFixtures.getTextMessage(guide);
         sendMessage.setText(guide);
         sendMessage.setUser(MessagesFixtures.getAIUser());
