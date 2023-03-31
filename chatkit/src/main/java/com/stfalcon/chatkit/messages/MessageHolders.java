@@ -779,12 +779,13 @@ public class MessageHolders {
                         style.getIncomingDefaultBubblePaddingTop(),
                         style.getIncomingDefaultBubblePaddingRight(),
                         style.getIncomingDefaultBubblePaddingBottom());
-                ViewCompat.setBackground(bubble, style.getIncomingBubbleDrawable());
+                //bubble这里就不用全包围模式的背景色了 改成自己一个背景色
+                //ViewCompat.setBackground(bubble, style.getIncomingBubbleDrawable());
             }
 
             if (text != null) {
                 text.setTextColor(style.getIncomingTextColor());
-                //text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getIncomingTextSize());
+                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getIncomingTextSize());
                 //text.setTypeface(text.getTypeface(), style.getIncomingTextStyle());
                 text.setAutoLinkMask(style.getTextAutoLinkMask());
                 text.setLinkTextColor(style.getIncomingTextLinkColor());
@@ -843,7 +844,7 @@ public class MessageHolders {
 
             if (text != null) {
                 text.setTextColor(style.getOutcomingTextColor());
-                //text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getOutcomingTextSize());
+                text.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getOutcomingTextSize());
                 //text.setTypeface(text.getTypeface(), style.getOutcomingTextStyle());
                 text.setAutoLinkMask(style.getTextAutoLinkMask());
                 text.setLinkTextColor(style.getOutcomingTextLinkColor());

@@ -2,37 +2,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:background="@color/white"
+    tools:background="#f00"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="8dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:layout_marginTop="8dp">
 
-    <com.stfalcon.chatkit.utils.ShapeImageView
+    <ImageView
         android:id="@id/messageUserAvatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
         tools:src="@drawable/ai_avatar"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_alignParentTop="true" />
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@id/bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/message_incoming_bubble_margin_right"
-        android:layout_marginRight="@dimen/message_incoming_bubble_margin_right"
-        android:layout_toEndOf="@id/messageUserAvatar"
+       android:layout_toEndOf="@id/messageUserAvatar"
         android:layout_toRightOf="@id/messageUserAvatar"
         android:orientation="vertical"
-        app:alignContent="stretch"
-        app:alignItems="stretch"
         app:flexWrap="wrap"
         app:justifyContent="flex_end">
 
         <TextView
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingEnd="24dp"
+            android:background="@drawable/shape_incoming_message"
             android:id="@id/messageText"
             android:textSize="@dimen/message_text_size"
             tools:text="###########################################################################################################################################################################################"
@@ -53,32 +52,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
             android:orientation="horizontal">
             <ImageView
-                android:tint="#f00"
-                android:id="@id/messageShare"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="4dp"
-                android:src="@drawable/ic_share"
-                app:layout_alignSelf="center" />
-            <ImageView
-                android:tint="#f00"
+                android:tint="@color/dark_gray"
                 android:id="@id/messageCopy"
-                android:layout_marginStart="4dp"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:src="@drawable/ic_copy"
                 app:layout_alignSelf="center" />
             <ImageView
-                android:tint="#f00"
+                android:tint="@color/dark_gray"
+                android:id="@id/messageShare"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="6dp"
+                android:src="@drawable/ic_share"
+                app:layout_alignSelf="center" />
+            <ImageView
+                android:tint="@color/dark_gray"
                 android:id="@id/messageDelete"
                 android:layout_marginStart="4dp"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:padding="4dp"
+                android:padding="6dp"
                 android:src="@drawable/ic_delete"
                 app:layout_alignSelf="center" />
         </LinearLayout>

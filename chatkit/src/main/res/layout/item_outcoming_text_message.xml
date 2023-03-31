@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:background="#f00"
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
@@ -23,6 +24,10 @@
 
         <TextView
             android:id="@id/messageText"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
             android:textSize="@dimen/message_text_size"
             tools:text="########FFFF#########"
             android:layout_width="wrap_content"
